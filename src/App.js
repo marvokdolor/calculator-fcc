@@ -1,10 +1,3 @@
-/*
-References:
-- https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
-- https://codepen.io/marvokdolor/pen/Vmoege?editors=0010
-- https://www.w3schools.com/jsref/jsref_eval.asp
-
-*/
 import React from "react"
 import "./style.css"
 import calcData from "./calcData.js"
