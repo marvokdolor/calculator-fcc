@@ -1,0 +1,29 @@
+body {
+    text-align: center;
+}
+
+#display {
+    background-color: black;
+    margin: 0 40%;
+    color: white;
+}
+
+#add {
+    background-color: orange;
+}
+
+#subtract {
+    background-color: orange;
+}
+
+#multiply {
+    background-color: orange;
+}
+
+#divide {
+    background-color: orange;
+}
+
+#equals {
+    background-color: orange;
+}
