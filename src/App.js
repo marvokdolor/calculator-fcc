@@ -6,40 +6,63 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            displayText: "0",
-            num: "",
             arrInput: []
         }
+        this.updateInput = this.updateInput.bind(this)
 
     }
     updateInput = (input) => {
-
+        let newArr = [...this.state.arrInput, input]
         switch (input){
-            case("equals"):
+            case("+"):
+            case("-"):
+            case("*"):
+            case("/"):
+                if ((/[+-/*]/).test(newArr[newArr.length-2])) {
+                    newArr.splice(newArr.length-2, 1)
+                }
                 this.setState(prevState => ({
-                    num: eval(prevState.num)
+                    arrInput: newArr
                 }))
+                break
+            case("equals"):
+                let result = eval(this.state.arrInput.join(""))
+                this.setState({
+                    arrInput: [result]
+                })
                 break
             case("clear"):
                 this.setState({
-                    num: ""
+                    arrInput: []
                 })
+                break
+            case("0"):
+                // if array starts with a zero, and another zero is entered just replace it, don't enter another one
+                if (this.state.arrInput.length===1 && this.state.arrInput[0]==="0") {
+                    this.setState(prevState => ({
+                        arrInput: prevState.arrInput
+                    }))
+                } else {
+                    this.setState(prevState => ({
+                        arrInput: newArr
+                    }))
+                }
                 break
             default:
                 this.setState(prevState => ({
-                    num: prevState.num + input
+                    arrInput: newArr
                 }))
                 break
         }
     }
     /* TODOs
-    1. When inputting numbers, my calculator should not allow a number to begin with multiple zeros.
-    2. Two . in one number should not be accepted.
+    1. When inputting numbers, my calculator should not allow a number to begin with multiple zeros. DONE for the first number entered.
+    2. More than one . in one number should not be accepted.
     3.  If 2 or more operators are entered consecutively, the operation performed should be the last operator entered.
     */
 
     render() {
-        const displayText = this.state.num ? this.state.num : "0"
+        const displayText = this.state.arrInput.length === 0 ? "0" : this.state.arrInput
         return (
             <div id="calculator">
                 <h1>Calculator!</h1>
@@ -64,7 +87,6 @@ class CalcButton extends React.Component {
     }
 
     handleClick = (e) => {
-        // console.log(e.target.value)
         this.props.updateInput(e.target.value)
     }
 
