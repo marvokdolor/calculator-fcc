@@ -26,7 +26,7 @@ class App extends React.Component {
                 }))
                 break
             case("equals"):
-                let result = eval(this.state.arrInput.join(""))
+                let result = eval(this.state.arrInput.join("").replace(/[^-()\d/*+.]/g, ''))
                 this.setState({
                     arrInput: [result]
                 })
@@ -48,6 +48,26 @@ class App extends React.Component {
                     }))
                 }
                 break
+            case("."):
+                let match = this.state.arrInput.join("").match(/[+\-*/]/gi);
+                let newString
+                if (!match) {
+                    newString = this.state.arrInput.join("")
+                } else if (match) {
+                    let lastIndex  = this.state.arrInput.lastIndexOf(match[match.length-1]);
+                    newString = this.state.arrInput.slice(lastIndex)
+                }
+
+                if (newString.indexOf('.')===-1){
+                    this.setState(prevState => ({
+                        arrInput: newArr
+                    }))
+                } else {
+                    this.setState(prevState => ({
+                        arrInput: prevState.arrInput
+                    }))
+                }
+                break
             default:
                 this.setState(prevState => ({
                     arrInput: newArr
@@ -58,14 +78,14 @@ class App extends React.Component {
     /* TODOs
     1. When inputting numbers, my calculator should not allow a number to begin with multiple zeros. DONE for the first number entered.
     2. More than one . in one number should not be accepted.
-    3.  If 2 or more operators are entered consecutively, the operation performed should be the last operator entered.
+    3.  If 2 or more operators are entered consecutively, the operation performed should be the last operator entered. DONE
+    4. Carrie would like display text to go from right to left.
     */
 
     render() {
         const displayText = this.state.arrInput.length === 0 ? "0" : this.state.arrInput
         return (
             <div id="calculator">
-                <h1>Calculator!</h1>
                 <Display displayText={displayText}
                 />
                 {calcData.map( calcbutton =>

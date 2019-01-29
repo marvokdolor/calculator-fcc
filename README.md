@@ -4,6 +4,8 @@ I used [Create React App](https://github.com/facebook/create-react-app) to make 
 And I used these references when I got stuck while building the app:
 - https://github.com/therj/react-calculator/tree/master/src
 - https://www.w3schools.com/jsref/jsref_eval.asp
+- https://stackoverflow.com/questions/12117024/decimal-number-regular-expression-where-digit-after-decimal-is-optional/12117060
+- https://regex101.com/r/cW5gS1/1
 
 - [ ] Next step will be using responsive web design principles and front-end libraries like Bootstrap to make it much more usable and visually appealing.
 
